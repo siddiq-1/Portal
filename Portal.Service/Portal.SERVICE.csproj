@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Portal.Data\Portal.DATA.csproj" />
+    <ProjectReference Include="..\Portal.DTO\Portal.DTO.csproj" />
+    <ProjectReference Include="..\Portal.Model\Portal.MODEL.csproj" />
+  </ItemGroup>
+
 </Project>
