@@ -4,25 +4,25 @@ using Portal.DTO;
 using Portal.SERVICE.IService;
 using Portal.UTILITY;
 
-namespace Portal.API.Controllers.Candidate
+namespace Portal.API.Controllers.UserController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CandidateController : ControllerBase
+    public class UserController : ControllerBase
     {
-        readonly ICandidateService _candidateService;
-        public CandidateController(ICandidateService candidateService)
+        readonly IUserService _userService;
+        public UserController(IUserService userService)
         {
-            _candidateService = candidateService;
+            _userService = userService;
         }
-        [HttpGet("GetCandidate")]
-        public async Task<ServiceResult<IEnumerable<CandidateModelDTO>>> GetCandidate()
+        [HttpGet("GetUser")]
+        public async Task<ServiceResult<IEnumerable<SignUpModelDTO>>> GetUser()
         {
-            ServiceResult<IEnumerable<CandidateModelDTO>> serviceResult = new ServiceResult<IEnumerable<CandidateModelDTO>>();
+            ServiceResult<IEnumerable<SignUpModelDTO>> serviceResult = new ServiceResult<IEnumerable<SignUpModelDTO>>();
             try
             {
-                var candidateResult = await _candidateService.GetCandidate();
-                serviceResult.SetSuccess(candidateResult);
+                var userResult = await _userService.GetUser();
+                serviceResult.SetSuccess(userResult);
             }
             catch (Exception ex)
             {
@@ -31,14 +31,14 @@ namespace Portal.API.Controllers.Candidate
             return serviceResult;
         }
 
-        [HttpGet("GetCandidate/{id}")]
-        public async Task<ServiceResult<CandidateModelDTO>> GetCandidateById([FromRoute] int id)
+        [HttpGet("GetUser/{id}")]
+        public async Task<ServiceResult<SignUpModelDTO>> GetUserById([FromRoute] int id)
         {
-            ServiceResult<CandidateModelDTO> serviceResult = new ServiceResult<CandidateModelDTO>();
+            ServiceResult<SignUpModelDTO> serviceResult = new ServiceResult<SignUpModelDTO>();
             try
             {
-                var candidateResult = await _candidateService.GetCandidateById(id);
-                serviceResult.SetSuccess(candidateResult);
+                var userResult = await _userService.GetUserById(id);
+                serviceResult.SetSuccess(userResult);
             }
             catch (Exception ex)
             {
@@ -47,10 +47,10 @@ namespace Portal.API.Controllers.Candidate
             return serviceResult;
         }
 
-        [HttpPost("CreateCandidate")]
-        public async Task<ServiceResult<CandidateModelDTO>> CreateCandidate([FromBody] CandidateModelDTO Model)
+        [HttpPost("CreateUser")]
+        public async Task<ServiceResult<SignUpModelDTO>> CreateUser([FromBody] SignUpModelDTO Model)
         {
-            ServiceResult<CandidateModelDTO> serviceResult = new ServiceResult<CandidateModelDTO>();
+            ServiceResult<SignUpModelDTO> serviceResult = new ServiceResult<SignUpModelDTO>();
             try
             {
                 if (!ModelState.IsValid)
@@ -59,8 +59,8 @@ namespace Portal.API.Controllers.Candidate
                 }
                 else
                 {
-                    var adminResult = await _candidateService.AddCandidate(Model);
-                    if (adminResult > 0)
+                    var userResult = await _userService.AddUser(Model);
+                    if (userResult > 0)
                         serviceResult.Success("");
                     else
                         serviceResult.Failure("");
@@ -73,10 +73,10 @@ namespace Portal.API.Controllers.Candidate
             return serviceResult;
         }
 
-        [HttpPut("EditCandidate/{id}")]
-        public async Task<ServiceResult<CandidateModelDTO>> EditCandidate([FromRoute] int id, [FromBody] CandidateModelDTO Model)
+        [HttpPut("EditUser/{id}")]
+        public async Task<ServiceResult<SignUpModelDTO>> EditUser([FromRoute] int id, [FromBody] SignUpModelDTO Model)
         {
-            ServiceResult<CandidateModelDTO> serviceResult = new ServiceResult<CandidateModelDTO>();
+            ServiceResult<SignUpModelDTO> serviceResult = new ServiceResult<SignUpModelDTO>();
             try
             {
                 if (!ModelState.IsValid)
@@ -85,8 +85,8 @@ namespace Portal.API.Controllers.Candidate
                 }
                 else
                 {
-                    var adminResult = await _candidateService.UpdateCandidate(Model);
-                    if (adminResult > 0)
+                    var userResult = await _userService.UpdateUser(Model);
+                    if (userResult > 0)
                         serviceResult.Success("");
                     else
                         serviceResult.Failure("");
@@ -99,10 +99,10 @@ namespace Portal.API.Controllers.Candidate
             return serviceResult;
         }
 
-        [HttpDelete("DeleteCandidate/{id}")]
-        public async Task<ServiceResult<CandidateModelDTO>> DeleteCandidate([FromRoute] int id, [FromBody] CandidateModelDTO Model)
+        [HttpDelete("DeleteUser/{id}")]
+        public async Task<ServiceResult<SignUpModelDTO>> DeleteJob([FromRoute] int id, [FromBody] SignUpModelDTO Model)
         {
-            ServiceResult<CandidateModelDTO> serviceResult = new ServiceResult<CandidateModelDTO>();
+            ServiceResult<SignUpModelDTO> serviceResult = new ServiceResult<SignUpModelDTO>();
             try
             {
                 if (!ModelState.IsValid)
@@ -111,8 +111,8 @@ namespace Portal.API.Controllers.Candidate
                 }
                 else
                 {
-                    var adminResult = await _candidateService.DeleteCandidate(Model);
-                    if (adminResult > 0)
+                    var userResult = await _userService.UpdateUser(Model);
+                    if (userResult > 0)
                         serviceResult.Success("");
                     else
                         serviceResult.Failure("");
@@ -124,6 +124,5 @@ namespace Portal.API.Controllers.Candidate
             }
             return serviceResult;
         }
-
     }
 }
