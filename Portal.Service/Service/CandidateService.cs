@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Portal.DATA.IRepository;
 using Portal.DATA.Repository;
 using Portal.DTO;
 using Portal.MODEL;
@@ -14,8 +15,8 @@ namespace Portal.SERVICE.Service
     public class CandidateService :ICandidateService
     {
         readonly IMapper _mapper;
-        readonly CandidateRepository _candidateRepository;
-        public CandidateService(CandidateRepository candidateRepository,IMapper mapper)
+        readonly ICandidateRepository _candidateRepository;
+        public CandidateService(ICandidateRepository candidateRepository,IMapper mapper)
         {
             _candidateRepository = candidateRepository;
             _mapper = mapper;

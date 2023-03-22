@@ -17,5 +17,6 @@ namespace Portal.SERVICE.IService
         Task<int> AddAdmin(AdminModelDTO Model);
         Task<int> UpdateAdmin(AdminModelDTO Model);
         Task<int> DeleteAdmin(AdminModelDTO Model);
+
     }
 }
