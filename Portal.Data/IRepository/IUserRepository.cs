@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,5 +17,6 @@ namespace Portal.DATA.IRepository
         Task<int> AddModel(UserModel Model);
         Task<int> UpdateModel(UserModel Model);
         Task<int> DeleteModel(UserModel Model);
+        Task<UserModel> FindUserByPredicate(Expression<Func<UserModel,bool>> predicate);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Portal.DATA.IRepository;
 using Portal.DATA.Repository;
 using Portal.DTO;
 using Portal.MODEL;
@@ -6,6 +7,7 @@ using Portal.SERVICE.IService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,9 +15,9 @@ namespace Portal.SERVICE.Service
 {
     public class UserService : IUserService
     {
-        readonly UserRepository _userRepository;
+        readonly IUserRepository _userRepository;
         readonly IMapper _mapper;
-        public UserService(UserRepository userRepository, IMapper mapper)
+        public UserService(IUserRepository userRepository, IMapper mapper)
         {
             _mapper = mapper;
             _userRepository = userRepository;
@@ -35,6 +37,14 @@ namespace Portal.SERVICE.Service
             return userResult;
         }
 
+        public async Task<SignUpModelDTO> FindUser(Expression<Func<SignUpModelDTO, bool>> predicate)
+        {
+            var userModel = _mapper.Map<Expression<Func<SignUpModelDTO,bool>>, Expression<Func<UserModel,bool>>>(predicate);
+            var result = await _userRepository.FindUserByPredicate(userModel);
+            var userResult = _mapper.Map<UserModel, SignUpModelDTO>(result);
+            return userResult;
+        }
+
         public async Task<IEnumerable<SignUpModelDTO>> GetUser()
         {
             var userModel = await _userRepository.GetModel();
@@ -44,7 +54,7 @@ namespace Portal.SERVICE.Service
 
         public async Task<SignUpModelDTO> GetUserById(int id)
         {
-            var userModel =await _userRepository.GetById(id);
+            var userModel =await _userRepository.GetModelById(id);
             var userResult = _mapper.Map<UserModel, SignUpModelDTO>(userModel);
             return userResult;
         }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Portal.DATA.IRepository;
 using Portal.DATA.Repository;
 using Portal.DTO;
 using Portal.MODEL;
@@ -8,9 +9,9 @@ namespace Portal.SERVICE.Service
 {
     public class AdminService : IAdminService
     {
-        readonly AdminRepository _adminRepository; 
+        readonly IAdminRepository _adminRepository; 
         readonly IMapper _mapper;
-        public AdminService(AdminRepository adminRepository , IMapper mapper)
+        public AdminService(IAdminRepository adminRepository , IMapper mapper)
         {
             _mapper = mapper;
             _adminRepository= adminRepository;

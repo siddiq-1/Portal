@@ -5,38 +5,36 @@ namespace Portal.DATA.Repository
 {
     public class JobRepository : Repository<JobProfileModel>, IJobsRepository
     {
-        readonly Repository<JobProfileModel> _repository;
-        public JobRepository(PortalContext dbContext, Repository<JobProfileModel> repository) : base(dbContext)
+        public JobRepository(PortalContext dbContext) : base(dbContext)
         {
-            _repository = repository;
         }
         public async Task<int> AddModel(JobProfileModel Model)
         {
-           var ModelResult = await _repository.Add(Model);
+           var ModelResult = await Add(Model);
             return ModelResult;
         }
 
         public async Task<int> DeleteModel(JobProfileModel Model)
         {
-            var ModelResult = await _repository.Delete(Model);
+            var ModelResult = await Delete(Model);
             return ModelResult;
         }
 
         public async Task<IEnumerable<JobProfileModel>> GetModel()
         {
-            var ModelResult = await _repository.GetAll();
+            var ModelResult = await GetAll();
             return ModelResult;
         }
 
         public async Task<JobProfileModel> GetModelById(int id)
         {
-            var ModelResult = await _repository.GetById(id);
-            return ModelResult;
+            var ModelResult = await GetById(id);
+            return ModelResult; 
         }
 
         public async Task<int> UpdateModel(JobProfileModel Model)
         {
-            var ModelResult = await _repository.Update(Model);
+            var ModelResult = await Update(Model);
             return ModelResult;
         }
     }
