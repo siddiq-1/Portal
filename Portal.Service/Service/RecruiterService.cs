@@ -14,9 +14,9 @@ namespace Portal.SERVICE.Service
 {
     public class RecruiterService : IRecruiterService
     {
-        readonly RecruitersRepository _recruitersRepository;
+        readonly IRecruitersRepository _recruitersRepository;
         readonly IMapper _mapper;
-        public RecruiterService(RecruitersRepository recruitersRepository,IMapper mapper)
+        public RecruiterService(IRecruitersRepository recruitersRepository,IMapper mapper)
         {
             _recruitersRepository = recruitersRepository;
             _mapper = mapper;

@@ -1,4 +1,5 @@
 ﻿using Portal.DTO;
+using Portal.MODEL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Portal.DATA.IRepository
 {
     public interface IAuthenticationRepository
     {
-        Task GenerateToken(LoginModelDTO loginModelDTO);
+        Task<UserModel> ValidateUser(LoginModelDTO loginModelDto);
+        string GenerateToken(SignUpModelDTO signUpModelDTO);
     }
 }

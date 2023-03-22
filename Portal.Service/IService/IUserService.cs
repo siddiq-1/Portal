@@ -1,4 +1,6 @@
 ﻿using Portal.DTO;
+using Portal.MODEL;
+using System.Linq.Expressions;
 
 namespace Portal.SERVICE.IService
 {
@@ -11,5 +13,6 @@ namespace Portal.SERVICE.IService
         Task<int> AddUser(SignUpModelDTO Model);
         Task<int> UpdateUser(SignUpModelDTO Model);
         Task<int> DeleteUser(SignUpModelDTO Model);
+        Task<SignUpModelDTO> FindUser(Expression<Func<SignUpModelDTO, bool>> predicate);
     }
 }

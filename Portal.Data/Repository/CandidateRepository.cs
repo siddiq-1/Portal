@@ -10,10 +10,8 @@ namespace Portal.DATA.Repository
 {
     public class CandidateRepository : Repository<CandidateModel> , ICandidateRepository
     {
-        readonly Repository<CandidateModel> _candidateRepo ;
-        public CandidateRepository(PortalContext db ,Repository<CandidateModel> candidateRepo ) : base(db)
+        public CandidateRepository(PortalContext db) : base(db)
         {
-            _candidateRepo = candidateRepo;
         }
 
         public Task<int> AddModel(CandidateModel Model)
@@ -28,12 +26,12 @@ namespace Portal.DATA.Repository
 
         public Task<IEnumerable<CandidateModel>> GetModel()
         {
-            return _candidateRepo.GetAll();
+            return GetAll();
         }
 
         public Task<CandidateModel> GetModelById(int id)
         {
-            return _candidateRepo.GetById(id);
+            return GetById(id);
         }
 
         public Task<int> UpdateModel(CandidateModel Model)

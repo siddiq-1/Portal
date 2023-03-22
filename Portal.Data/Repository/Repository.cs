@@ -3,6 +3,7 @@ using Portal.DATA.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,6 +57,11 @@ namespace Portal.DATA.Repository
             var result = await _db.SaveChangesAsync();
 
             return result;
+        }
+        public async Task<T> FindModel(Expression<Func<T, bool>> predicate)
+        {
+            T modelResult = await _dbEntities.Where(predicate).FirstOrDefaultAsync();
+            return modelResult;
         }
     }
 }

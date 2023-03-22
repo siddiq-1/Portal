@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Portal.DATA.IRepository;
 using Portal.DATA.Repository;
 using Portal.DTO;
 using Portal.MODEL;
@@ -14,9 +15,9 @@ namespace Portal.SERVICE.Service
     public class JobService :IJobService
     {
        
-        readonly JobRepository _jobRepository;
+        readonly IJobsRepository _jobRepository;
         readonly IMapper _mapper;
-        public JobService(JobRepository jobRepository , IMapper mapper)
+        public JobService(IJobsRepository jobRepository , IMapper mapper)
         {
             _mapper = mapper;
             _jobRepository = jobRepository;
